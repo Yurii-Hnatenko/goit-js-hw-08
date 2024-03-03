@@ -1,0 +1,51 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    height: 100vh;
+    background-color: #f4f4f4;
+
+}
+
+.gallery-item:hover,
+.gallery-item:focus {
+    transform: scale(1.05);
+}
+
+.gallery {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    width: 1128px
+}
+
+.gallery-item {
+    margin: 10px;
+    width: calc((100% - 72px) / 3);
+    transition: transform 0.3s ease-in-out;
+}
+
+.gallery-link {
+    display: block;
+    width: 360px;
+    height: 300px;
+}
+
+.gallery-image {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+.modal-lightbox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
