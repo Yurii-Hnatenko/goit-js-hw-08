@@ -68,19 +68,19 @@ const images = [
 const galleryContainer = document.querySelector('.gallery');
 let currentLightboxInstance;
 
-function createGalleryItem(image) {
+function createGalleryItem(currentImage) {
   const listItem = document.createElement('li');
   listItem.classList.add('gallery-item');
 
   const link = document.createElement('a');
   link.classList.add('gallery-link');
-  link.href = image.original;
+  link.href = currentImage.original;
 
   const img = document.createElement('img');
   img.classList.add('gallery-image');
-  img.src = image.preview;
-  img.setAttribute('data-source', image.original);
-  img.alt = image.description;
+  img.src = currentImage.preview;
+  img.setAttribute('data-source', currentImage.original);
+  img.alt = currentImage.description;
 
   link.appendChild(img);
   listItem.appendChild(link);
@@ -88,8 +88,8 @@ function createGalleryItem(image) {
   return listItem;
 }
 
-images.forEach(image => {
-  const galleryItem = createGalleryItem(image);
+images.forEach(currentImage => {
+  const galleryItem = createGalleryItem(currentImage);
   galleryContainer.appendChild(galleryItem);
 });
 
@@ -105,22 +105,21 @@ galleryContainer.addEventListener('click', (event) => {
       currentLightboxInstance = null;
     } else {
       currentLightboxInstance = basicLightbox.create(`
-        <img src="${largeImageSrc}" width="800" height="600">
+        <div class="modal-lightbox">
+          <img src="${largeImageSrc}" width="800" height="600">
+        </div>
       `, {
         onShow: (instance) => {
-          instance.element().classList.add('modal-lightbox');
+          instance.element().addEventListener('click', () => {
+            instance.close();
+          });
         },
         onClose: (instance) => {
-          instance.element().classList.remove('modal-lightbox');
           currentLightboxInstance = null;
         }
       });
 
       currentLightboxInstance.show();
-      currentLightboxInstance.element().addEventListener('click', () => {
-        currentLightboxInstance.close();
-      });
     }
   }
 });
-
