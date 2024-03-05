@@ -66,7 +66,7 @@ const images = [
 
 
 const galleryContainer = document.querySelector('.gallery');
-let currentLightboxInstance;
+let currentLightboxInstance = null;
 
 function createGalleryItem(currentImage) {
   const listItem = document.createElement('li');
@@ -103,23 +103,23 @@ galleryContainer.addEventListener('click', (event) => {
     if (currentLightboxInstance) {
       currentLightboxInstance.close();
       currentLightboxInstance = null;
-    } else {
-      currentLightboxInstance = basicLightbox.create(`
-        <div class="modal-lightbox">
-          <img src="${largeImageSrc}" width="800" height="600">
-        </div>
-      `, {
-        onShow: (instance) => {
-          instance.element().addEventListener('click', () => {
-            instance.close();
-          });
-        },
-        onClose: (instance) => {
-          currentLightboxInstance = null;
-        }
-      });
-
-      currentLightboxInstance.show();
     }
+
+    currentLightboxInstance = basicLightbox.create(`
+      <div class="modal-lightbox">
+        <img src="${largeImageSrc}" width="800" height="600">
+      </div>
+    `, {
+      onShow: (instance) => {
+        instance.element().addEventListener('click', () => {
+          instance.close();
+        });
+      },
+      onClose: (instance) => {
+        currentLightboxInstance = null;
+      }
+    });
+
+    currentLightboxInstance.show();
   }
 });

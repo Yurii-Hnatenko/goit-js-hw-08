@@ -44,13 +44,12 @@ body {
 }
 
 .modal-lightbox {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(40, 36, 36, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 100vw;
     width: 100vw;
-    position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
